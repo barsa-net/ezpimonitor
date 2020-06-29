@@ -54,7 +54,7 @@ $update = $Config->checkUpdate();
         if ($Config->get('esm:custom_title') != '')
             echo $Config->get('esm:custom_title');
         else
-            echo Misc::getHostname().' - '.Misc::getLanIP();
+            echo Misc::getHostname();//.' - '.Misc::getLanIP();
         ?>
     </div>
 
