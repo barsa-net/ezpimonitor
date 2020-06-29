@@ -3,7 +3,7 @@ require '../autoload.php';
 date_default_timezone_set(@date_default_timezone_get());
 
 // Hostname
-$hostname = php_uname('n');
+$hostname = Misc::getHostname();
 
 // OS
 if (!file_exists('/usr/bin/lsb_release') || !($os = shell_exec('/usr/bin/lsb_release -ds | cut -d= -f2 | tr -d \'"\'')))
