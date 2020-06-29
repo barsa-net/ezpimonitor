@@ -32,7 +32,11 @@ class Misc
      */
     public static function getHostname()
     {
-        return php_uname('n');
+        if(!file_exists("/dockerhost/etc/hostname") || !($hostname = shell_exec('cat /dockerhost/etc/hostname')))
+        {
+            $hostname = php_uname('n');
+        }
+        return trim($hostname);
     }
 
 
