@@ -80,10 +80,11 @@ class Config
     {
         if ($this->get('esm:check_updates') === false)
             return null;
-        
+
         $response       = null;
         $this_version   = $this->get('esm:version');
-        $update_url     = $this->get('esm:website').'/esm-web/update/'.$this_version;
+        $update_url = "https://api.github.com/repos/".str_replace("https://github.com/","",$this->get('esm:website'))."/releases/latest";
+
 
         if (!function_exists('curl_version'))
         {
@@ -97,9 +98,9 @@ class Config
             curl_setopt_array($curl, array(
                 CURLOPT_CONNECTTIMEOUT  => 10,
                 CURLOPT_RETURNTRANSFER  => true,
-                CURLOPT_SSL_VERIFYPEER  => false,
+                CURLOPT_SSL_VERIFYPEER  => true,
                 CURLOPT_TIMEOUT         => 60,
-                CURLOPT_USERAGENT       => 'eZ Server Monitor `Web',
+                CURLOPT_USERAGENT       => 'eZ Pi Monitor',
                 CURLOPT_URL             => $update_url,
             ));
 
@@ -107,12 +108,16 @@ class Config
 
             curl_close($curl);
         }
+        $datas = array(
+            'availableVersion'  => $response['tag_name'],
+            'fullpath'          => $response['assets'][0]['browser_download_url'],
+        );
 
         if (!is_null($response) && !empty($response))
         {
-            if (is_null($response['error']))
+            if (is_null($response['message']) && (version_compare(ltrim($this->get('esm:version'),"v"),ltrim($datas['availableVersion'],"v")) < 0))
             {
-                return $response['datas'];
+                return $datas;
             }
         }
     }
