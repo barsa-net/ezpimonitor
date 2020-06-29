@@ -92,6 +92,10 @@ $update = $Config->checkUpdate();
                         <td id="system-os"></td>
                     </tr>
                     <tr>
+                        <td>Hypriot version</td>
+                        <td id="system-hypriot"></td>
+                    </tr>
+                    <tr>
                         <td>Kernel version</td>
                         <td id="system-kernel"></td>
                     </tr>

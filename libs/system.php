@@ -22,6 +22,17 @@ if (!file_exists('/usr/bin/lsb_release') || !($os = shell_exec('/usr/bin/lsb_rel
 $os = trim($os, '"');
 $os = str_replace("\n", '', $os);
 
+// Hypriot
+if (!file_exists('/dockerhost/usr/lib/os-release') || !($hypriot = shell_exec('cat /dockerhost/usr/lib/os-release | grep HYPRIOT_IMAGE_VERSION | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
+{
+    if (!file_exists('/usr/lib/os-release') || !($hypriot = shell_exec('cat /usr/lib/os-release | grep HYPRIOT_IMAGE_VERSION | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
+    {
+        $hypriot = 'N.A';
+    }
+}
+
+$hypriot = trim($hypriot);
+
 // Kernel
 if (!($kernel = shell_exec('/bin/uname -r')))
 {
