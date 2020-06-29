@@ -19,7 +19,13 @@ if (!(exec('/bin/df -T -P | tail -n +2 | awk \'{ if (NF > 7) { for (i=1; i<NF-6;
 }
 else
 {
-    $mounted_points = array();
+    $parsedMounted = array(
+            'points'        => array(),
+            'total'         => array(),
+            'used'          => array(),
+            'free'          => array(),
+            'percent'  => array(),
+        );
     $key = 0;
 
     foreach ($df as $mounted)
@@ -41,15 +47,22 @@ else
                 continue 2;
         }
 
-        if (!in_array($mount, $mounted_points))
+        $Mpercent = trim($percent, '%');
+
+        # Check for duplicates
+        if(!in_array($mount, $parsedMounted['points']) && !in_array($total, $parsedMounted['total']) && !in_array($used, $parsedMounted['used']) && !in_array($free, $parsedMounted['free']) && !in_array($Mpercent, $parsedMounted['percent']))
         {
-            $mounted_points[] = trim($mount);
+            $parsedMounted['points'][] = trim($mount);
+            $parsedMounted['total'][] = $total;
+            $parsedMounted['used'][] = $used;
+            $parsedMounted['free'][] = $free;
+            $parsedMounted['percent'][] = $Mpercent;
 
             $datas[$key] = array(
                 'total'         => Misc::getSize($total * 1024),
                 'used'          => Misc::getSize($used * 1024),
                 'free'          => Misc::getSize($free * 1024),
-                'percent_used'  => trim($percent, '%'),
+                'percent_used'  => $Mpercent,
                 'mount'         => $mount,
             );
 
