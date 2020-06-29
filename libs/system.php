@@ -39,6 +39,8 @@ if (!($kernel = shell_exec('/bin/uname -r')))
     $kernel = 'N.A';
 }
 
+$kernel = trim($kernel);
+
 // Uptime
 if (!($totalSeconds = shell_exec('/usr/bin/cut -d. -f1 /proc/uptime')))
 {
@@ -71,6 +73,8 @@ if (!($server_date = shell_exec('/bin/date')))
 {
     $server_date = date('Y-m-d H:i:s');
 }
+
+$server_date = trim($server_date);
 
 
 $datas = array(
