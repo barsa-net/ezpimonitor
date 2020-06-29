@@ -1,10 +1,10 @@
 {
     "esm": {
-        "version": "2.5",
-        "website": "http://www.ezservermonitor.com",
-        "check_updates": true,
+        "version": "1.0",
+        "website": "https://github.com/barsa-net/ezhypriotmonitor",
+        "check_updates": false,
         "auto_refresh": 0,
-        "theme": "blue",
+        "theme": "obsidian",
         "custom_title": ""
     },
     "cpu": {
