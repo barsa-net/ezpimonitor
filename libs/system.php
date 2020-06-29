@@ -76,6 +76,7 @@ if (!($server_date = shell_exec('/bin/date')))
 $datas = array(
     'hostname'      => $hostname,
     'os'            => $os,
+    'hypriot'       => $hypriot,
     'kernel'        => $kernel,
     'uptime'        => $uptime,
     'last_boot'     => $last_boot,
