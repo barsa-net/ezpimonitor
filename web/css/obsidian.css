@@ -1,0 +1,60 @@
+body.theme-obsidian,.theme-obsidian #main-container table:not(.no-style) thead,.theme-obsidian #main-container table.firstBold tbody tr td:first-child {
+    color: #fff
+}
+
+body.theme-obsidian a,body.theme-obsidian .box .box-content table a {
+    color: #8cd2d5
+}
+
+body.theme-obsidian a:hover,body.theme-obsidian .box .box-content table a:hover {
+    color: #699ea0;
+    text-decoration: none
+}
+
+body.theme-obsidian ::-moz-selection {
+    background-color: #5b5b5b;
+    color: #c1c1c1
+}
+
+body.theme-obsidian ::selection {
+    background-color: #5b5b5b;
+    color: #c1c1c1
+}
+
+body.theme-obsidian nav[role="main"],.theme-obsidian #main-container .box-header {
+    background-color: #242c3b;
+}
+
+body.theme-obsidian nav[role="main"] {
+    border-bottom: 2px solid #181d28;
+}
+
+body.theme-obsidian nav[role="main"]>ul>li>a:hover {
+    background: #9a9a9a
+}
+
+body.theme-obsidian #main-container table:not(.no-style) tbody tr:hover {
+    background: #4d5b76
+}
+
+body.theme-obsidian .progressbar-wrap {
+    background-color: rgba(88, 100, 146, 0.6)
+}
+
+html.theme-obsidian,.theme-obsidian #main-container,.theme-obsidian #main-container .box {
+    background-color: #343f53
+}
+
+.theme-obsidian #main-container table:not(.no-style) tbody tr:nth-child(odd) {
+    background-color: #3b4863
+}
+
+.theme-obsidian #main-container table:not(.no-style) tr {
+    border-bottom: 1px solid #3b4863;
+    border-top: 1px solid #3b4863;
+}
+
+.theme-obsidian #main-container .box {
+    box-shadow: 3px 3px 0 rgba(88, 100, 146, 0.6);
+    border: 1px solid #242c3b;
+}

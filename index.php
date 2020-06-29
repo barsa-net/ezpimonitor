@@ -4,13 +4,14 @@ $Config = new Config();
 $update = $Config->checkUpdate();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html <?php echo "class=\"theme-".$Config->get('esm:theme')."\""; ?> lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" /> 
     <title>eZ Hypriot Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
+    <link rel="stylesheet" href="web/css/obsidian.min.css" type="text/css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
