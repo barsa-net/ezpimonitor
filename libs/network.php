@@ -60,49 +60,75 @@ function getIpCommand($commands, $interface)
     }
 }
 
-
-$getInterfaces_cmd = getInterfacesCommand($commands);
-
-if (is_null($getInterfaces_cmd) || !(exec($getInterfaces_cmd, $getInterfaces)))
+if (!file_exists('/dockerhost/sys/class/net') || !($network = scandir('/dockerhost/sys/class/net')))
 {
-    $datas[] = array('interface' => 'N.A', 'ip' => 'N.A');
+    $getInterfaces_cmd = getInterfacesCommand($commands);
+
+    if (is_null($getInterfaces_cmd) || !(exec($getInterfaces_cmd, $getInterfaces)))
+    {
+        $datas[] = array('interface' => 'N.A', 'ip' => 'N.A');
+    }
+    else
+    {
+        foreach ($getInterfaces as $name)
+        {
+            $ip = null;
+
+            $getIp_cmd = getIpCommand($commands, $name);        
+
+            if (is_null($getIp_cmd) || !(exec($getIp_cmd, $ip)))
+            {
+                $network[] = array(
+                    'name' => $name,
+                    'ip'   => 'N.A',
+                );
+            }
+            else
+            {
+                if (!isset($ip[0]))
+                    $ip[0] = '';
+
+                $network[] = array(
+                    'name' => $name,
+                    'ip'   => $ip[0],
+                );
+            }
+        }
+
+        foreach ($network as $interface)
+        {
+            // Get transmit and receive datas by interface
+            exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
+            exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
+
+            $datas[] = array(
+                'interface' => $interface['name'],
+                'ip'        => $interface['ip'],
+                'transmit'  => Misc::getSize($getBandwidth_tx[0]),
+                'receive'   => Misc::getSize($getBandwidth_rx[0]),
+            );
+
+            unset($getBandwidth_tx, $getBandwidth_rx);
+        }
+    }
 }
 else
 {
-    foreach ($getInterfaces as $name)
-    {
-        $ip = null;
-
-        $getIp_cmd = getIpCommand($commands, $name);        
-
-        if (is_null($getIp_cmd) || !(exec($getIp_cmd, $ip)))
-        {
-            $network[] = array(
-                'name' => $name,
-                'ip'   => 'N.A',
-            );
-        }
-        else
-        {
-            if (!isset($ip[0]))
-                $ip[0] = '';
-
-            $network[] = array(
-                'name' => $name,
-                'ip'   => $ip[0],
-            );
-        }
-    }
-
     foreach ($network as $interface)
     {
-        // Get transmit and receive datas by interface
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
+        # Ignore Docker virtual networks
+        if(preg_match('/(\.+|br-.+|veth.+|docker0)/', $interface))
+            continue;
+
+        # Get transmit and receive datas by interface
+        exec('cat /dockerhost/sys/class/net/'.$interface.'/statistics/tx_bytes', $getBandwidth_tx);
+        exec('cat /dockerhost/sys/class/net/'.$interface.'/statistics/rx_bytes', $getBandwidth_rx);
+
+        $ip = gethostbyname("dockerhost.".$interface);
 
         $datas[] = array(
-            'interface' => $interface['name'],
-            'ip'        => $interface['ip'],
+            'interface' => $interface,
+            'ip'        => !($ip == "dockerhost.".$interface) ? $ip : 'N.A',
             'transmit'  => Misc::getSize($getBandwidth_tx[0]),
             'receive'   => Misc::getSize($getBandwidth_rx[0]),
         );
