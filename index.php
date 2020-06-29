@@ -8,7 +8,7 @@ $update = $Config->checkUpdate();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" /> 
-    <title>eZ Hypriot Monitor - <?php echo Misc::getHostname(); ?></title>
+    <title>eZ Pi Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
     <link rel="stylesheet" href="web/css/obsidian.min.css" type="text/css">
@@ -45,8 +45,8 @@ $update = $Config->checkUpdate();
 
 <nav role="main">
     <div id="appname">
-        <a href="index.php"><span class="icon-gauge"></span>eHM</a>
-        <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Hypriot Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
+        <a href="index.php"><span class="icon-gauge"></span>ePM</a>
+        <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Pi Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
     </div>
 
     <div id="hostname">
