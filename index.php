@@ -8,7 +8,7 @@ $update = $Config->checkUpdate();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1" /> 
-    <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
+    <title>eZ Hypriot Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -44,8 +44,8 @@ $update = $Config->checkUpdate();
 
 <nav role="main">
     <div id="appname">
-        <a href="index.php"><span class="icon-gauge"></span>eSM</a>
-        <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
+        <a href="index.php"><span class="icon-gauge"></span>eHM</a>
+        <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Hypriot Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
     </div>
 
     <div id="hostname">
