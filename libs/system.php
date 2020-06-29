@@ -63,9 +63,30 @@ else
 }
 
 // Current users
-if (!($current_users = shell_exec('who -u | awk \'{ print $1 }\' | wc -l')))
+if(file_exists(($utmp = "/dockerhost/var/run/utmp")))
 {
-    $current_users = 'N.A';
+
+    $utmp_size = 384;
+
+    if(!($uf = fopen($utmp, 'rb'))){
+        return;
+    }
+
+    $current_users = 0;
+    for($i=0;$chunk = fgets($uf, 3);){
+        if(($type = unpack( "s", $chunk)[1]) == 7)
+            $current_users++;
+        fseek($uf,++$i*$utmp_size);
+    }
+
+    fclose($uf);
+}
+else
+{
+    if (!($current_users = shell_exec('who -u | awk \'{ print $1 }\' | wc -l')))
+    {
+        $current_users = 'N.A';
+    }
 }
 
 // Server datetime
