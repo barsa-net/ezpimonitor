@@ -146,11 +146,11 @@ $update = $Config->checkUpdate();
 
 
 
-    <div class="box column-right" id="esm-cpu">
+    <div class="box column-right" id="esm-raspberrypi">
         <div class="box-header">
-            <h1>CPU</h1>
+            <h1>Raspberry Pi Info</h1>
             <ul>
-                <li><a href="#" class="reload" onclick="esm.reloadBlock('cpu');"><span class="icon-cycle"></span></a></li>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('raspberrypi');"><span class="icon-cycle"></span></a></li>
             </ul>
         </div>
 
@@ -159,28 +159,36 @@ $update = $Config->checkUpdate();
                 <tbody>
                     <tr>
                         <td>Model</td>
-                        <td id="cpu-model"></td>
+                        <td id="raspberrypi-model"></td>
                     </tr>
                     <tr>
-                        <td>Cores</td>
-                        <td id="cpu-num_cores"></td>
+                        <td>SoC</td>
+                        <td id="raspberrypi-soc"></td>
                     </tr>
                     <tr>
-                        <td>Speed</td>
-                        <td id="cpu-frequency"></td>
+                        <td>CPU</td>
+                        <td id="raspberrypi-cpu"></td>
                     </tr>
                     <tr>
-                        <td>Cache</td>
-                        <td id="cpu-cache"></td>
+                        <td>CPU Cores</td>
+                        <td id="raspberrypi-num_cores"></td>
                     </tr>
                     <tr>
-                        <td>Bogomips</td>
-                        <td id="cpu-bogomips"></td>
+                        <td>CPU Speed</td>
+                        <td id="raspberrypi-frequency"></td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer</td>
+                        <td id="raspberrypi-manufacturer"></td>
+                    </tr>
+                    <tr>
+                        <td>Is warranty-void bit set?</td>
+                        <td id="raspberrypi-warrantyvoid"></td>
                     </tr>
                     <?php if ($Config->get('cpu:enable_temperature')): ?>
                         <tr>
                             <td>Temperature</td>
-                            <td id="cpu-temp"></td>
+                            <td id="raspberrypi-temp"></td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

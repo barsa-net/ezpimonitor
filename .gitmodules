@@ -1,0 +1,3 @@
+[submodule "libs/rpi_rev"]
+	path = libs/rpi_rev
+	url = ../raspberry_pi_revision.git

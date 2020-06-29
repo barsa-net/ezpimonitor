@@ -59,6 +59,24 @@ esm.getCpu = function() {
 
 }
 
+esm.getRaspberryPi = function() {
+
+    var module = 'raspberrypi';
+    
+    esm.reloadBlock_spin(module);
+
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+
+        esm.insertDatas($box, module, data);
+
+        esm.reloadBlock_spin(module);
+
+    }, 'json');
+
+}
+
 
 esm.getMemory = function() {
 
@@ -297,7 +315,7 @@ esm.getServices = function() {
 
 esm.getAll = function() {
     esm.getSystem();
-    esm.getCpu();
+    esm.getRaspberryPi();
     esm.getLoad_average();
     esm.getMemory();
     esm.getSwap();
@@ -361,6 +379,7 @@ esm.mapping = {
     system: esm.getSystem,
     load_average: esm.getLoad_average,
     cpu: esm.getCpu,
+    raspberrypi: esm.getRaspberryPi,
     memory: esm.getMemory,
     swap: esm.getSwap,
     disk: esm.getDisk,
