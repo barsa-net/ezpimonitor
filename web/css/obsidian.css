@@ -50,8 +50,7 @@ html.theme-obsidian,.theme-obsidian #main-container,.theme-obsidian #main-contai
 }
 
 .theme-obsidian #main-container table:not(.no-style) tr {
-    border-bottom: 1px solid #3b4863;
-    border-top: 1px solid #3b4863;
+    border: 0;
 }
 
 .theme-obsidian #main-container .box {
