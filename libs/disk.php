@@ -75,5 +75,11 @@ else
 
 }
 
+if ($Config->get('disk:show_filesystem'))
+{
+    usort($datas, function($a, $b) {
+        return $a['filesystem'] <=> $b['filesystem'];
+    });
+}
 
 echo json_encode($datas);
