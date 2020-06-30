@@ -2,7 +2,7 @@
     "esm": {
         "version": "1.0",
         "website": "https://github.com/barsa-net/ezpimonitor",
-        "check_updates": false,
+        "check_updates": true,
         "auto_refresh": 0,
         "theme": "obsidian",
         "custom_title": ""
